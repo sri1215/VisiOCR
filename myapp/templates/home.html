@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisiOCR - Visitor Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        input[type="file"] {
+            padding: 10px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #22de90;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 50px;
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #15cdb7;
+            
+        }
+      
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VisiOCR - Visitor Management System</h1>
+        <form action="{% url 'upload_image' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Upload Image</button>
+        </form>
+        {% if name %}
+            <div class="result">
+                <h2>Visitor Information:</h2>
+                <p><strong>Name:</strong> {{ name }}</p>
+                <p><strong>Date of Birth:</strong> {{ birth_date }}</p>
+                <p><strong>Age:</strong> {{ age }}</p>
+                <img src="{{ visiting_pass_image }}" alt="Visiting Pass">
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
